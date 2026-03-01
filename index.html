@@ -5,6 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Up App Autônomos</title>
     <style>
+        
+        /* Estilo do Novo Modal do Banner */
+.modal-detalhes-linkup {
+    display: none; /* Começa escondido */
+    position: fixed;
+    z-index: 11000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-detalhes-content {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 25px;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
+.fechar-detalhes {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+}
+
+.btn-zap-modal {
+    background: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+ 
+        
         /* --- ADIÇÃO: Mãozinha animada apenas no primeiro card --- */
 .vitrine .produto-card:first-child::after {
     content: "👆";
@@ -345,20 +398,27 @@
         let htmlBanners = '';
         let count = 0;
 
-        // Agora o Banner segue a mesma lógica da lista (Fixo primeiro, resto randômico)
         produtosEmbaralhados.forEach((row, i) => {
-            // Verifica se existe a célula e o valor da imagem na coluna C (índice 2)
             const imgBanner = (row.c && row.c[2] && row.c[2].v) ? row.c[2].v : '';
             let linkBanner = (row.c && row.c[1] && row.c[1].v) ? row.c[1].v.toString().trim() : '#';
+
+            // --- AQUI ESTÁ O CONSERTO QUE VOCÊ PEDIU ---
+            // Pega a Categoria da Coluna F (índice 5) em vez de texto fixo
+            const categoriaDaPessoa = (row.c && row.c[5] && row.c[5].v) ? row.c[5].v : 'Destaque';
+           
+            let nomeProf = (row.c && row.c[3]) ? row.c[3].v : '';
+            let textoInfo = (row.c && row.c[4]) ? row.c[4].v.replace(/'/g, "\\'") : '';
+            let linkZap = (row.c && row.c[9]) ? row.c[9].v : '#';
 
             if (linkBanner !== '#' && !linkBanner.startsWith('http')) {
                 linkBanner = 'https://' + linkBanner;
             }
 
             if (imgBanner && imgBanner.includes('http')) {
-                htmlBanners += `<div onclick="window.top.location.href='${linkBanner}'" style="min-width: 100%; height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-                                    <img src="${imgBanner}" class="banner-img" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                                </div>`;
+                // Aqui troquei o 'Destaque' pela variável categoriaDaPessoa
+                htmlBanners += `<div onclick="abrirDetalhes('${nomeProf}', '${textoInfo}', '${imgBanner}', '${linkZap}', '${categoriaDaPessoa}')" style="min-width: 100%; height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <img src="${imgBanner}" class="banner-img">
+                </div>`;
                 count++;
             }
         });
@@ -375,6 +435,9 @@
             }, 4000);
         }
     }
+
+ 
+
 
 
     function mostrarProdutos(termo = '') {
@@ -497,6 +560,35 @@
         document.body.appendChild(modal);
     }
 
+// Função que o Banner chama para abrir o Modal
+function abrirDetalhes(nome, textoE, imagemC, linkJ, categoria) {
+    const modal = document.getElementById('modalInfo');
+    const conteudo = document.getElementById('conteudoDetalhes');
+   
+    conteudo.innerHTML = `
+        <img src="${imagemC}" style="width: 100%; max-height: 250px; border-radius: 20px; object-fit: contain; margin-bottom: 15px;">
+        <h2 style="color: #44749d; margin: 0;">${nome}</h2>
+        <span style="background: #eef2f7; padding: 5px 12px; border-radius: 10px; color: #44749d; font-weight: bold; font-size: 14px;">✨ ${categoria}</span>
+       
+        <div style="text-align: left; margin-top: 25px; font-size: 17px; color: #333; white-space: pre-wrap; line-height: 1.5;">
+            ${textoE}
+        </div>
+       
+        <a href="${linkJ}" target="_blank" class="btn-zap-modal">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="22">
+            FALAR NO WHATSAPP
+        </a>
+    `;
+   
+    modal.style.display = 'flex'; // Faz o modal aparecer
+}
+
+// Função para fechar o modal no X
+function fecharModalInfo() {
+    document.getElementById('modalInfo').style.display = 'none';
+}
+
+
     // FUNÇÕES DO MODAL DE CADASTRO
     function abrirCadastro() { document.getElementById('modalCadastro').style.display='block'; document.getElementById('overlay').style.display='block'; }
     function fecharModal() { document.getElementById('modalCadastro').style.display='none'; document.getElementById('overlay').style.display='none'; }
@@ -521,11 +613,23 @@
     }
 
     carregarDados();
+    
+    
+ 
+
+    
 </script>
 <div id="modalInfo" class="modal-detalhes-linkup">
     <div class="modal-detalhes-content">
         <span class="fechar-detalhes" onclick="fecharModalInfo()">❌</span>
         <div id="conteudoDetalhes"></div>
+    </div>
+</div>
+<div id="modalInfo" class="modal-detalhes-linkup">
+    <div class="modal-detalhes-content">
+        <span class="fechar-detalhes" onclick="fecharModalInfo()">×</span>
+        <div id="conteudoDetalhes">
+            </div>
     </div>
 </div>
 </body>

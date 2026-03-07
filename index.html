@@ -5,142 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Up App Autônomos</title>
     <style>
-        
-        /* Estilo do Novo Modal do Banner */
-.modal-detalhes-linkup {
-    display: none; /* Começa escondido */
-    position: fixed;
-    z-index: 11000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    align-items: center;
-    justify-content: center;
-}
+        /* Estilos Originais do Gustavo */
+        .modal-detalhes-linkup {
+            display: none;
+            position: fixed;
+            z-index: 11000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+        }
 
-.modal-detalhes-content {
-    background: white;
-    width: 90%;
-    max-width: 450px;
-    padding: 25px;
-    border-radius: 25px;
-    position: relative;
-    max-height: 85vh;
-    overflow-y: auto;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-}
+        .modal-detalhes-content {
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            padding: 25px;
+            border-radius: 25px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+        }
 
-.fechar-detalhes {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 30px;
-    cursor: pointer;
-    color: #333;
-    font-weight: bold;
-}
+        .fechar-detalhes {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #333;
+            font-weight: bold;
+        }
 
-.btn-zap-modal {
-    background: #25D366;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 18px;
-    border-radius: 15px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
-}
+        .btn-zap-modal {
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
 
- 
-        
-        /* --- ADIÇÃO: Mãozinha animada apenas no primeiro card --- */
-.vitrine .produto-card:first-child::after {
-    content: "👆";
-    position: absolute;
-    top: 95px;
-    right: -10px;
-    font-size: 30px;
-    background: white;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    animation: cliqueAnim 1.5s infinite;
-    z-index: 20;
-}
+        .vitrine .produto-card:first-child::after {
+            content: "👆";
+            position: absolute;
+            top: 95px;
+            right: -10px;
+            font-size: 30px;
+            background: white;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            animation: cliqueAnim 1.5s infinite;
+            z-index: 20;
+        }
 
-@keyframes cliqueAnim {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
+        @keyframes cliqueAnim {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
 
-/* --- ADIÇÃO: Estilo do Modal de Detalhes --- */
-.modal-detalhes-linkup {
-    display: none;
-    position: fixed;
-    z-index: 11000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-detalhes-content {
-    background: white;
-    width: 90%;
-    max-width: 450px;
-    padding: 25px;
-    border-radius: 25px;
-    position: relative;
-    max-height: 85vh;
-    overflow-y: auto;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-.fechar-detalhes {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 30px;
-    cursor: pointer;
-    color: #333;
-}
-
-.btn-zap-modal {
-    background: #25D366;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-align: center;
-    padding: 18px;
-    border-radius: 15px;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 20px;
-}
-        
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #c6d4e1; scroll-behavior: smooth; }
         header { background: #44749d; padding: 25px 10px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .titulo-app { color: #ffffff; font-size: 1.5rem; font-weight: bold; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .container { padding: 15px; max-width: 800px; margin: auto; }
         .banner-container { width: 100%; height: 200px !important; border-radius: 20px; overflow: hidden; margin-bottom: 20px; background: #ffffff; position: relative; }
         .banner-wrapper { display: flex; width: 100%; height: 100%; transition: transform 0.8s ease-in-out; }
-        .banner-link { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
         .banner-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        
+       
         .categorias { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 10px 0 20px; }
         @media (max-width: 600px) {
             .categorias { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 5px !important; }
@@ -172,6 +118,26 @@
         .btn-monetizze { background: #004576; color: white; }
         .btn-whatsapp { background: #25D366; color: white; }
 
+        /* --- ESTILO DO BOTÃO DE LIKE --- */
+        .btn-like {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin: 5px auto 10px;
+            transition: 0.3s;
+            color: #44749d;
+            font-weight: bold;
+        }
+        .btn-like:active { transform: scale(0.9); }
+        .like-icon { color: #e74c3c; font-size: 1.1rem; }
+
         #btnVoltarTopo { position: fixed; bottom: 20px; right: 20px; background: #44749d; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; display: none; z-index: 1000; cursor: pointer; }
         .subtítulo-container { height: 35px; overflow: hidden; margin: 10px 0; }
         .subtítulo-rotativo { color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; font-weight: bold; animation: rotacionar 15s infinite; }
@@ -182,7 +148,6 @@
             75%, 95%  { transform: translateY(-105px); }
             100%      { transform: translateY(0); } }
 
-        /* --- PARTE CONCERTADA DO BOTÃO E MODAL --- */
         .btn-anuncie-linkup {
             position: fixed !important; bottom: 110px !important; right: 20px !important; left: auto !important;
             background-color: #ff8c00 !important; color: white !important;
@@ -268,13 +233,13 @@
             Autorizo uso de imagem/dados e aviso se mudar de WhatsApp.
         </div>
         <label style="font-size: 13px; margin-bottom: 10px; display: block;"><input type="checkbox" id="aceitoTermos"> Eu aceito os termos</label>
-        
+       
         <input type="text" id="nome" placeholder="👤 Nome Completo" class="input-linkup">
         <input type="text" id="apelido" placeholder="🏷️ Apelido/Nome do Negócio" class="input-linkup">
         <input type="text" id="funcao" placeholder="🛠️ O que você faz?" class="input-linkup">
         <input type="tel" id="whatsapp" placeholder="📱 WhatsApp com DDD" class="input-linkup">
         <input type="text" id="bairro" placeholder="📍 Seu Bairro/Cidade" class="input-linkup">
-        
+       
         <button onclick="irParaEtapa(3)" style="width: 100%; background: #ff8c00; color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;">VER PLANOS ➡️</button>
     </div>
 
@@ -301,8 +266,15 @@
             </div>
             <div style="font-weight:bold; color:#b8860b;">R$ 10,00</div>
         </div>
-        <p style="font-size: 11px; color: #999; text-align: center;">*Pagamento único via PIX após o envio.</p>
+        <p style="font-size: 11px; color: #999; text-align: center;">*Pagamento mensal via PIX após o envio.</p>
         <button onclick="irParaEtapa(2)" style="background:none; border:none; color:#999; cursor:pointer; width:100%; font-size:12px;">← Voltar</button>
+    </div>
+</div>
+
+<div id="modalInfo" class="modal-detalhes-linkup">
+    <div class="modal-detalhes-content">
+        <span class="fechar-detalhes" onclick="fecharModalInfo()">❌</span>
+        <div id="conteudoDetalhes"></div>
     </div>
 </div>
 
@@ -313,6 +285,9 @@
 
     const sheetId = '1FvOMPzfXvC_-nfG0Vj_BoH6_qWAkwGFgED_hknT_a9Q';
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=loja`;
+   
+    // URL DA SUA API GOOGLE APPS SCRIPT (COLE AQUI O SEU LINK DE WEB APP)
+    const urlAPI_Likes = 'https://script.google.com/macros/s/AKfycbwFNYMY9GHydkzFddFBq8G0L6F_R7JCPVXHOTlkwwvyaYGR9R8-1RWdd2qDpzR14qqF/exec';
 
     const segmentosLojas = [
         { nome: "Lojas Link App: A maior loja de afiliados do Brasil", emoji: "🛒", link: "" },
@@ -363,30 +338,19 @@
 
     function voltarAoTopo() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
-  async function carregarDados() {
+    async function carregarDados() {
         try {
             const response = await fetch(url);
             const text = await response.text();
             const jsonData = JSON.parse(text.substring(47).slice(0, -2));
             let dadosDaPlanilha = jsonData.table.rows;
 
-            if (dadosDaPlanilha && dadosDaPlanilha.length > 1) {
-                // REGRA: Isola o primeiro item (Linha 2 da Planilha)
+            if (dadosDaPlanilha && dadosDaPlanilha.length > 0) {
                 let itemFixo = dadosDaPlanilha[0];
-               
-                // Pega todo o resto da lista (do segundo item em diante)
                 let resto = dadosDaPlanilha.slice(1);
-               
-                // Embaralha apenas o resto
                 resto.sort(() => Math.random() - 0.5);
-               
-                // Junta novamente: O fixo sempre no topo (índice 0), e o resto sorteado
                 produtosEmbaralhados = [itemFixo, ...resto];
-            } else {
-                produtosEmbaralhados = [...dadosDaPlanilha];
             }
-
-            // Chama as funções com a nova lista organizada
             configurarBanners();
             mostrarProdutos();
         } catch (error) { console.error("Erro:", error); }
@@ -398,24 +362,14 @@
         let htmlBanners = '';
         let count = 0;
 
-        produtosEmbaralhados.forEach((row, i) => {
+        produtosEmbaralhados.forEach((row) => {
             const imgBanner = (row.c && row.c[2] && row.c[2].v) ? row.c[2].v : '';
-            let linkBanner = (row.c && row.c[1] && row.c[1].v) ? row.c[1].v.toString().trim() : '#';
-
-            // --- AQUI ESTÁ O CONSERTO QUE VOCÊ PEDIU ---
-            // Pega a Categoria da Coluna F (índice 5) em vez de texto fixo
             const categoriaDaPessoa = (row.c && row.c[5] && row.c[5].v) ? row.c[5].v : 'Destaque';
-           
             let nomeProf = (row.c && row.c[3]) ? row.c[3].v : '';
             let textoInfo = (row.c && row.c[4]) ? row.c[4].v.replace(/'/g, "\\'") : '';
             let linkZap = (row.c && row.c[9]) ? row.c[9].v : '#';
 
-            if (linkBanner !== '#' && !linkBanner.startsWith('http')) {
-                linkBanner = 'https://' + linkBanner;
-            }
-
             if (imgBanner && imgBanner.includes('http')) {
-                // Aqui troquei o 'Destaque' pela variável categoriaDaPessoa
                 htmlBanners += `<div onclick="abrirDetalhes('${nomeProf}', '${textoInfo}', '${imgBanner}', '${linkZap}', '${categoriaDaPessoa}')" style="min-width: 100%; height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
                     <img src="${imgBanner}" class="banner-img">
                 </div>`;
@@ -424,11 +378,9 @@
         });
 
         bannerWrapper.innerHTML = htmlBanners;
-       
         if (count > 1) {
             let index = 0;
             if (window.bannerInterval) clearInterval(window.bannerInterval);
-           
             window.bannerInterval = setInterval(() => {
                 index = (index + 1) % count;
                 bannerWrapper.style.transform = 'translateX(' + (index * -100) + '%)';
@@ -436,45 +388,44 @@
         }
     }
 
- 
-
-
-
     function mostrarProdutos(termo = '') {
         let html = '';
         const termoBusca = termo.toLowerCase().trim();
         produtosEmbaralhados.forEach((row) => {
             if (!row.c[3] || row.c[3].v === "Nome") return;
-            const nome = row.c[3].v;
-            const preco = row.c[4] ? (row.c[4].f || row.c[4].v).toString() : '0,00';
+           
+            // MAPEA COLUNAS CONFORME SUA PLANILHA
+            const likesCount = row.c[0] ? (row.c[0].v || 0) : 0; // Coluna A
+            const nome = row.c[3].v; // Coluna D
+            const preco = row.c[4] ? (row.c[4].f || row.c[4].v).toString() : 'Combine';
             const categoria = row.c[5] ? row.c[5].v : '';
             const destaque = row.c[6] ? row.c[6].v.toLowerCase() : '';
             const tipo = row.c[7] ? row.c[7].v.toLowerCase() : '';
             const foto = row.c[8] ? row.c[8].v : '';
             const link = row.c[9] ? row.c[9].v : '#';
-            const desc = (row.c[10] && row.c[10].v) ? row.c[10].v : 'Clique para ver mais detalhes.';
+            const desc = (row.c[10] && row.c[10].v) ? row.c[10].v : 'Clique para ver detalhes.';
 
             if ((categoriaAtual === 'todos' || categoria.toLowerCase().trim() === categoriaAtual || (categoriaAtual === 'em-destaque' && destaque === 'sim')) &&
-                (nome.toLowerCase().includes(termoBusca) || tipo.includes(termoBusca) || preco.includes(termoBusca))) {
+                (nome.toLowerCase().includes(termoBusca) || tipo.includes(termoBusca))) {
                
                 let btnClass = 'btn-ml', btnTexto = `🛒 MERCADO LIVRE 🤝🏻`;
                 if(tipo.includes('hotmart')) { btnClass = 'btn-hotmart'; btnTexto = `🛒 HOTMART 🔥`; }
                 else if(tipo.includes('magalu')) { btnClass = 'btn-magalu'; btnTexto = `🛒 MAGALU 🙋🏻‍♂️`; }
                 else if(tipo.includes('amazon')) { btnClass = 'btn-amazon'; btnTexto = `🛒 AMAZON 📦`; }
                 else if(tipo.includes('shopee')) { btnClass = 'btn-shopee'; btnTexto = `🛒 SHOPEE 🛍️`; }
-                else if(tipo.includes('shein')) { btnClass = 'btn-shein'; btnTexto = `🛒 SHEIN 🏷️`; }
-                else if(tipo.includes('temu')) { btnClass = 'btn-temu'; btnTexto = `🛒 TEMU 👔`; }
-                else if(tipo.includes('aliexpress')) { btnClass = 'btn-aliexpress'; btnTexto = `🛒 ALIEXPRESS 👜`; }
-                else if(tipo.includes('monetizze')) { btnClass = 'btn-monetizze'; btnTexto = `🛒 MONETIZZE 💰`; }
                 else if(tipo.includes('whatsapp')) { btnClass = 'btn-whatsapp'; btnTexto = `📞 WHATSAPP 📱`; }
                
-                // Adicionado: onclick no produto-card para abrir detalhes
                 html += `<div class="produto-card" onclick="abrirDetalhes('${nome}', '${desc.replace(/'/g, "\\'")}', '${foto}', '${link}', '${categoria}')" style="cursor:pointer;">
                     ${destaque === 'sim' ? '<div class="selo-destaque">EM DESTAQUE 🔥</div>' : ''}
                     <button class="btn-ws-card" onclick="event.stopPropagation(); compartilharProduto('${nome}', '${link}')"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></button>
                     <img src="${foto}" class="img-produto" onerror="this.src='https://via.placeholder.com/150'">
                     <div class="produto-cat-label">${categoria}</div>
                     <div class="produto-nome">${nome}</div>
+                   
+                    <button class="btn-like" onclick="event.stopPropagation(); curtirProfissional('${nome}', this)">
+                        <span class="like-icon">❤️</span> <span class="num-likes">${likesCount}</span>
+                    </button>
+
                     <div class="produto-desc-label">${desc}</div>
                     <div class="produto-preco">${preco}</div>
                     <a href="${link}" target="_blank" onclick="event.stopPropagation();" class="btn ${btnClass}">${btnTexto}</a>
@@ -484,32 +435,49 @@
         document.getElementById('vitrine').innerHTML = html;
     }
 
-    // --- NOVAS FUNÇÕES DO MODAL DE DETALHES ---
-    function abrirDetalhes(nome, info, imagem, linkZap, categoria) {
+    // FUNÇÃO QUE CONECTA COM SUA API DE LIKES
+ async function curtirProfissional(nome, botao) {
+    const spanLikes = botao.querySelector('.num-likes');
+    botao.style.background = "#ffebee";
+
+    // Usamos o modo 'no-cors' para o Google não barrar o envio do Localhost
+    try {
+        await fetch(urlAPI_Likes, {
+            method: 'POST',
+            mode: 'no-cors', // ISSO AQUI LIBERA O ENVIO
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: JSON.stringify({ "nome": nome })
+        });
+
+        // Como o modo 'no-cors' não deixa ler a resposta de volta,
+        // vamos somar +1 na tela manualmente para o usuário ver na hora.
+        let valorAtual = parseInt(spanLikes.innerText) || 0;
+        spanLikes.innerText = valorAtual + 1;
+
+    } catch (e) {
+        console.error("Erro no like:", e);
+    }
+}
+
+ 
+
+
+    function abrirDetalhes(nome, textoE, imagemC, linkJ, categoria) {
         const modal = document.getElementById('modalInfo');
         const conteudo = document.getElementById('conteudoDetalhes');
         conteudo.innerHTML = `
-            <div style="text-align: center;">
-                <img src="${imagem}" style="width: 140px; height: 140px; border-radius: 20px; object-fit: cover; margin-bottom: 15px; border: 3px solid #eee;">
-                <h2 style="font-size: 26px; margin: 0; color: #44749d;">${nome}</h2>
-                <p style="background: #eef2f7; display: inline-block; padding: 5px 15px; border-radius: 10px; color: #44749d; font-weight: bold; margin-top: 10px;">✨ ${categoria}</p>
-            </div>
-            <div style="margin-top: 25px; font-size: 19px; line-height: 1.6; color: #333; text-align: left;">
-                <p><strong>📝 Descrição Completa:</strong></p>
-                <p style="white-space: pre-wrap;">${info}</p>
-            </div>
-            <a href="${linkZap}" target="_blank" class="btn-zap-modal">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="25"> Falar no WhatsApp
-            </a>
+            <img src="${imagemC}" style="width: 100%; max-height: 250px; border-radius: 20px; object-fit: contain; margin-bottom: 15px;">
+            <h2 style="color: #44749d; margin: 0;">${nome}</h2>
+            <span style="background: #eef2f7; padding: 5px 12px; border-radius: 10px; color: #44749d; font-weight: bold; font-size: 14px;">✨ ${categoria}</span>
+            <div style="text-align: left; margin-top: 25px; font-size: 17px; color: #333; white-space: pre-wrap; line-height: 1.5;">${textoE}</div>
+            <a href="${linkJ}" target="_blank" class="btn-zap-modal"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="22"> FALAR NO WHATSAPP</a>
         `;
         modal.style.display = 'flex';
     }
 
-    function fecharModalInfo() {
-        document.getElementById('modalInfo').style.display = 'none';
-    }
-
- 
+    function fecharModalInfo() { document.getElementById('modalInfo').style.display = 'none'; }
 
     function filtrar(cat, btn) {
         categoriaAtual = cat;
@@ -521,23 +489,23 @@
     function executarBusca() { mostrarProdutos(document.getElementById('inputBusca').value); }
 
     async function compartilharProduto(nome, link) {
-        const textoProfissional = `Olha o contato do(a) ${nome} que encontrei no Link-Up! 🚀`;
+        const texto = `Olha o contato do(a) ${nome} no Link-Up! 🚀`;
         if (navigator.share) {
-            try { await navigator.share({ title: 'Link-Up Profissional', text: textoProfissional, url: link }); } catch (err) {}
+            try { await navigator.share({ title: 'Link-Up', text: texto, url: link }); } catch (err) {}
         } else {
-            navigator.clipboard.writeText(`${textoProfissional} ${link}`);
-            alert("Contato copiado! ✅");
+            navigator.clipboard.writeText(`${texto} ${link}`);
+            alert("Copiado! ✅");
         }
     }
 
     async function compartilharLoja() {
         const urlLoja = window.location.href;
-        const textoApp = 'Olha que top esse app com os melhores profissionais de Cruzeiro! 🛠️🚀';
+        const texto = 'App dos melhores profissionais de Cruzeiro! 🛠️🚀';
         if (navigator.share) {
-            try { await navigator.share({ title: 'Link-Up App', text: textoApp, url: urlLoja }); } catch (err) {}
+            try { await navigator.share({ title: 'Link-Up App', text: texto, url: urlLoja }); } catch (err) {}
         } else {
-            navigator.clipboard.writeText(`${textoApp} ${urlLoja}`);
-            alert("Link do Link-Up copiado! ✅");
+            navigator.clipboard.writeText(`${texto} ${urlLoja}`);
+            alert("Link copiado! ✅");
         }
     }
 
@@ -547,12 +515,9 @@
         modal.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; justify-content:center; align-items:center;";
         let conteudo = document.createElement('div');
         conteudo.style = "background:#fff; width:90%; max-width:400px; max-height:80vh; overflow-y:auto; border-radius:15px; padding:20px; position:relative; font-family: sans-serif;";
-        let htmlLista = `<h3 style="text-align:center; margin-bottom:20px;">Escolha uma Loja</h3>
-            <button onclick="document.getElementById('meuModalFlutuante').remove()" style="position:absolute; top:10px; right:10px; border:none; background:none; font-size:20px; cursor:pointer;">✕</button>`;
+        let htmlLista = `<h3 style="text-align:center; margin-bottom:20px;">Escolha uma Loja</h3><button onclick="document.getElementById('meuModalFlutuante').remove()" style="position:absolute; top:10px; right:10px; border:none; background:none; font-size:20px; cursor:pointer;">✕</button>`;
         segmentosLojas.forEach((seg) => {
-            let acao = (seg.link && seg.link !== "")
-                ? `<a href="${seg.link}" target="_blank" style="background:#228B22; color:white; padding:6px 12px; border-radius:8px; text-decoration:none; font-size:12px; font-weight:bold;">Entrar</a>`
-                : `<span style="color:#bbb; font-size:12px; font-style:italic;">Em breve 🚀</span>`;
+            let acao = (seg.link && seg.link !== "") ? `<a href="${seg.link}" target="_blank" style="background:#228B22; color:white; padding:6px 12px; border-radius:8px; text-decoration:none; font-size:12px; font-weight:bold;">Entrar</a>` : `<span style="color:#bbb; font-size:12px; font-style:italic;">Em breve 🚀</span>`;
             htmlLista += `<div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;"><span style="font-size:14px;">${seg.emoji} ${seg.nome}</span>${acao}</div>`;
         });
         conteudo.innerHTML = htmlLista;
@@ -560,79 +525,22 @@
         document.body.appendChild(modal);
     }
 
-// Função que o Banner chama para abrir o Modal
-function abrirDetalhes(nome, textoE, imagemC, linkJ, categoria) {
-    const modal = document.getElementById('modalInfo');
-    const conteudo = document.getElementById('conteudoDetalhes');
-   
-    conteudo.innerHTML = `
-        <img src="${imagemC}" style="width: 100%; max-height: 250px; border-radius: 20px; object-fit: contain; margin-bottom: 15px;">
-        <h2 style="color: #44749d; margin: 0;">${nome}</h2>
-        <span style="background: #eef2f7; padding: 5px 12px; border-radius: 10px; color: #44749d; font-weight: bold; font-size: 14px;">✨ ${categoria}</span>
-       
-        <div style="text-align: left; margin-top: 25px; font-size: 17px; color: #333; white-space: pre-wrap; line-height: 1.5;">
-            ${textoE}
-        </div>
-       
-        <a href="${linkJ}" target="_blank" class="btn-zap-modal">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="22">
-            FALAR NO WHATSAPP
-        </a>
-    `;
-   
-    modal.style.display = 'flex'; // Faz o modal aparecer
-}
-
-// Função para fechar o modal no X
-function fecharModalInfo() {
-    document.getElementById('modalInfo').style.display = 'none';
-}
-
-
-    // FUNÇÕES DO MODAL DE CADASTRO
     function abrirCadastro() { document.getElementById('modalCadastro').style.display='block'; document.getElementById('overlay').style.display='block'; }
     function fecharModal() { document.getElementById('modalCadastro').style.display='none'; document.getElementById('overlay').style.display='none'; }
     function irParaEtapa(n) {
-        if(n==3 && !document.getElementById('aceitoTermos').checked) return alert("Por favor, aceite os termos.");
+        if(n==3 && !document.getElementById('aceitoTermos').checked) return alert("Aceite os termos.");
         document.getElementById('etapa1').style.display='none'; document.getElementById('etapa2').style.display='none'; document.getElementById('etapa3').style.display='none';
         document.getElementById('etapa'+n).style.display='block';
     }
     function finalizar(plano) {
-        let msg = `Olá Gustavo! Novo cadastro no Link-Up.\n\n` +
-                  `🏆 *PLANO: ${plano.toUpperCase()}*\n` +
-                  `👤 Nome: ${document.getElementById('nome').value}\n` +
-                  `🏷️ Apelido: ${document.getElementById('apelido').value}\n` +
-                  `🛠️ Serviço: ${document.getElementById('funcao').value}\n` +
-                  `📱 Zap: ${document.getElementById('whatsapp').value}\n` +
-                  `📍 Bairro: ${document.getElementById('bairro').value}\n\n` +
-                  `📸 *ENVIE SUA FOTO ABAIXO!*`;
-        const meuZap = "5512992448264";
-        window.open(`https://wa.me/${meuZap}?text=${encodeURIComponent(msg)}`);
-        alert("Enviado! Agora me mande a FOTO e o COMPROVANTE aqui no WhatsApp.");
+        let msg = `Olá Gustavo! Novo cadastro Link-Up.\n🏆 Plano: ${plano}\n👤 Nome: ${document.getElementById('nome').value}\n🏷️ Apelido: ${document.getElementById('apelido').value}\n🛠️ Serviço: ${document.getElementById('funcao').value}\n📱 Zap: ${document.getElementById('whatsapp').value}\n📍 Bairro: ${document.getElementById('bairro').value}`;
+        window.open(`https://wa.me/5512992448264?text=${encodeURIComponent(msg)}`);
         fecharModal();
     }
 
     carregarDados();
-    
-    
- 
-
-    
 </script>
-<div id="modalInfo" class="modal-detalhes-linkup">
-    <div class="modal-detalhes-content">
-        <span class="fechar-detalhes" onclick="fecharModalInfo()">❌</span>
-        <div id="conteudoDetalhes"></div>
-    </div>
-</div>
-<div id="modalInfo" class="modal-detalhes-linkup">
-    <div class="modal-detalhes-content">
-        <span class="fechar-detalhes" onclick="fecharModalInfo()">×</span>
-        <div id="conteudoDetalhes">
-            </div>
-    </div>
-</div>
 </body>
 </html>
 
-
+ 

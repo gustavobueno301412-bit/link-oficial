@@ -278,15 +278,46 @@
     </div>
 </div>
 
+<div id="gu-instalar" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#f39c12; color:white; padding:20px; text-align:center; z-index:99999; font-family:sans-serif; border-radius:15px 15px 0 0; box-shadow: 0 -4px 15px rgba(0,0,0,0.3);">
+    <strong style="display:block; margin-bottom:10px; font-size:16px;">🚀 NÃO PERCA O ACESSO!</strong>
+    <p style="margin:0 0 15px 0; font-size:14px;">Adicione o LinkUp à sua tela inicial para entrar sempre que precisar, sem precisar do link!</p>
+   
+    <button onclick="avisarComoInstalar()" style="background:white; color:#f39c12; border:none; padding:12px 25px; font-weight:bold; border-radius:8px; cursor:pointer; width:100%; margin-bottom:10px;">COMO INSTALAR (Passo a Passo)</button>
+   
+    <button onclick="ignorarAviso()" style="background:transparent; color:white; border:1px solid white; padding:8px; font-size:12px; border-radius:5px; cursor:pointer; width:100%; opacity:0.8;">Já instalei / Não perguntar mais</button>
+</div>
 <script>
+    // ==========================================
+    // NOVO: CÓDIGO DO PORTEIRO (INSTALAÇÃO)
+    // ==========================================
+    const modoApp = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    const jaIgnorou = localStorage.getItem('linkup_pwa_ignore');
+
+    if (!modoApp && jaIgnorou !== 'true') {
+        setTimeout(() => {
+            if(document.getElementById('gu-instalar')) {
+                document.getElementById('gu-instalar').style.display = 'block';
+            }
+        }, 2000);
+    }
+
+    function avisarComoInstalar() {
+        alert("É fácil!\n\n1. Clique nos 3 PONTINHOS no canto superior direito.\n2. Escolha 'ADICIONAR À TELA INICIAL'.\n3. Pronto! O ícone vai aparecer no seu celular.");
+    }
+
+    function ignorarAviso() {
+        localStorage.setItem('linkup_pwa_ignore', 'true');
+        document.getElementById('gu-instalar').style.display = 'none';
+    }
+    // ==========================================
+
     let todosOsProdutos = [];
     let produtosEmbaralhados = [];
     let categoriaAtual = 'todos';
 
     const sheetId = '1FvOMPzfXvC_-nfG0Vj_BoH6_qWAkwGFgED_hknT_a9Q';
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=loja`;
-   
-    // URL DA SUA API GOOGLE APPS SCRIPT (COLE AQUI O SEU LINK DE WEB APP)
+  
     const urlAPI_Likes = 'https://script.google.com/macros/s/AKfycbwFNYMY9GHydkzFddFBq8G0L6F_R7JCPVXHOTlkwwvyaYGR9R8-1RWdd2qDpzR14qqF/exec';
 
     const segmentosLojas = [
@@ -333,7 +364,7 @@
 
     window.onscroll = function() {
         const btn = document.getElementById("btnVoltarTopo");
-        btn.style.display = (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) ? "block" : "none";
+        if(btn) btn.style.display = (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) ? "block" : "none";
     };
 
     function voltarAoTopo() { window.scrollTo({top: 0, behavior: 'smooth'}); }
@@ -355,7 +386,7 @@
             mostrarProdutos();
         } catch (error) { console.error("Erro:", error); }
     }
-   
+  
     function configurarBanners() {
         const bannerWrapper = document.getElementById('bannerApp');
         if (!bannerWrapper) return;
@@ -394,9 +425,8 @@
         produtosEmbaralhados.forEach((row) => {
             if (!row.c[3] || row.c[3].v === "Nome") return;
            
-            // MAPEA COLUNAS CONFORME SUA PLANILHA
-            const likesCount = row.c[0] ? (row.c[0].v || 0) : 0; // Coluna A
-            const nome = row.c[3].v; // Coluna D
+            const likesCount = row.c[0] ? (row.c[0].v || 0) : 0;
+            const nome = row.c[3].v;
             const preco = row.c[4] ? (row.c[4].f || row.c[4].v).toString() : 'Combine';
             const categoria = row.c[5] ? row.c[5].v : '';
             const destaque = row.c[6] ? row.c[6].v.toLowerCase() : '';
@@ -435,34 +465,20 @@
         document.getElementById('vitrine').innerHTML = html;
     }
 
-    // FUNÇÃO QUE CONECTA COM SUA API DE LIKES
- async function curtirProfissional(nome, botao) {
-    const spanLikes = botao.querySelector('.num-likes');
-    botao.style.background = "#ffebee";
-
-    // Usamos o modo 'no-cors' para o Google não barrar o envio do Localhost
-    try {
-        await fetch(urlAPI_Likes, {
-            method: 'POST',
-            mode: 'no-cors', // ISSO AQUI LIBERA O ENVIO
-            headers: {
-                'Content-Type': 'text/plain'
-            },
-            body: JSON.stringify({ "nome": nome })
-        });
-
-        // Como o modo 'no-cors' não deixa ler a resposta de volta,
-        // vamos somar +1 na tela manualmente para o usuário ver na hora.
-        let valorAtual = parseInt(spanLikes.innerText) || 0;
-        spanLikes.innerText = valorAtual + 1;
-
-    } catch (e) {
-        console.error("Erro no like:", e);
+    async function curtirProfissional(nome, botao) {
+        const spanLikes = botao.querySelector('.num-likes');
+        botao.style.background = "#ffebee";
+        try {
+            await fetch(urlAPI_Likes, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ "nome": nome })
+            });
+            let valorAtual = parseInt(spanLikes.innerText) || 0;
+            spanLikes.innerText = valorAtual + 1;
+        } catch (e) { console.error("Erro no like:", e); }
     }
-}
-
- 
-
 
     function abrirDetalhes(nome, textoE, imagemC, linkJ, categoria) {
         const modal = document.getElementById('modalInfo');

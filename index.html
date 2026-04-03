@@ -252,7 +252,7 @@
         .star-rating .selected { color: #f39c12; }
 
         /* ============================================================ */
-        /* INÍCIO: CÓDIGO NOVO DO GUSTAVO PARA ZOOM DA IMAGEM (ISOLADO) */
+        /* ZOOM DA IMAGEM E VÍDEO (ESTILO PADRÃO GUSTAVO) */
         /* ============================================================ */
         .gu-zoom-modal {
             display: none;
@@ -270,6 +270,12 @@
             border-radius: 5px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
+        /* Ajuste para o vídeo em zoom */
+        .gu-zoom-video-container {
+            width: 95%;
+            height: 80%;
+            max-width: 800px;
+        }
         .gu-zoom-fechar {
             position: absolute;
             top: 20px;
@@ -278,10 +284,8 @@
             font-size: 40px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 21000;
         }
-        /* ============================================================ */
-        /* FIM: CÓDIGO NOVO DO GUSTAVO PARA ZOOM DA IMAGEM (ISOLADO)    */
-        /* ============================================================ */
     </style>
 </head>
 <body>
@@ -407,6 +411,13 @@
     <span class="gu-zoom-fechar">&times;</span>
     <img class="gu-zoom-img" id="guZoomImg">
 </div>
+
+<div id="guZoomVideoModal" class="gu-zoom-modal" onclick="fecharZoomVideoGustavo()">
+    <span class="gu-zoom-fechar">&times;</span>
+    <div class="gu-zoom-video-container" id="guZoomVideoContent">
+        </div>
+</div>
+
 <div id="gu-instalar" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#f39c12; color:white; padding:20px; text-align:center; z-index:99999; font-family:sans-serif; border-radius:15px 15px 0 0; box-shadow: 0 -4px 15px rgba(0,0,0,0.3);">
     <strong style="display:block; margin-bottom:10px; font-size:16px;">🚀 NÃO PERCA O ACESSO!</strong>
     <p style="margin:0 0 15px 0; font-size:14px;">Adicione o LinkUp à sua tela inicial para entrar sempre que precisar!</p>
@@ -659,7 +670,6 @@
         let htmlGradeFotos = "";
         if (fotosExtras.length > 0) {
             htmlGradeFotos = `<div class="titulo-grade-fotos">🔥 TRABALHOS REALIZADOS 🔥</div><div class="grade-fotos-gustavo">`;
-            // ADICIONADO: onclick para abrir o zoom
             fotosExtras.forEach(f => { if(f && f.includes('http')) htmlGradeFotos += `<img src="${f}" onclick="abrirZoomGustavo('${f}')" onerror="this.style.display='none'">`; });
             htmlGradeFotos += `</div>`;
         }
@@ -670,7 +680,12 @@
             videosExtras.forEach(v => {
                 if(v && v.includes('http')) {
                     let embedUrl = formatarLinkYoutube(v);
-                    htmlGradeVideos += `<iframe src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+                    // NOVO: Adicionado onclick para abrir o zoom do vídeo
+                    htmlGradeVideos += `
+                    <div style="position:relative;">
+                        <iframe src="${embedUrl}" frameborder="0" allowfullscreen></iframe>
+                        <div onclick="abrirZoomVideoGustavo('${embedUrl}')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; background:transparent;"></div>
+                    </div>`;
                 }
             });
             htmlGradeVideos += `</div>`;
@@ -730,7 +745,7 @@
     }
 
     // ============================================================
-    // INÍCIO: JS NOVO DO GUSTAVO PARA ZOOM DA IMAGEM (ISOLADO)
+    // JS DE ZOOM (IMAGEM E VÍDEO)
     // ============================================================
     function abrirZoomGustavo(src) {
         const modalZoom = document.getElementById('guZoomModal');
@@ -742,9 +757,21 @@
     function fecharZoomGustavo() {
         document.getElementById('guZoomModal').style.display = 'none';
     }
-    // ============================================================
-    // FIM: JS NOVO DO GUSTAVO PARA ZOOM DA IMAGEM (ISOLADO)
-    // ============================================================
+
+    // NOVO: Funções para Zoom do Vídeo de Demonstração
+    function abrirZoomVideoGustavo(url) {
+        const modalVideo = document.getElementById('guZoomVideoModal');
+        const contentVideo = document.getElementById('guZoomVideoContent');
+        contentVideo.innerHTML = `<iframe src="${url}?autoplay=1" style="width:100%; height:100%; border-radius:10px;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+        modalVideo.style.display = 'flex';
+    }
+
+    function fecharZoomVideoGustavo() {
+        const modalVideo = document.getElementById('guZoomVideoModal');
+        const contentVideo = document.getElementById('guZoomVideoContent');
+        contentVideo.innerHTML = ""; // Limpa o iframe para parar o som
+        modalVideo.style.display = 'none';
+    }
 
     function abrirModalDepoimento() { document.getElementById('modalDepoimento').style.display='flex'; }
     function fecharModalDepoimento() { document.getElementById('modalDepoimento').style.display='none'; }
@@ -768,7 +795,6 @@
 
     function fecharModalInfo() {
         document.getElementById('modalInfo').style.display = 'none';
-        // Para parar o vídeo ao fechar o modal
         document.getElementById('conteudoDetalhes').innerHTML = "";
     }
 
